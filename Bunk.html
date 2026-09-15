@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bunk Buddy Pro | SCT - Seshadripuram College Tumakuru | By Shahid U</title>
+<meta name="description" content="Official Attendance Calculator for Seshadripuram College Tumakuru. Project by Shahid U - U11SZ24S0179">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif}
+body{background:#0a0a0f;color:#fff;min-height:100vh;display:flex;justify-content:center;padding:16px;overflow-x:hidden}
+body::before{content:"";position:fixed;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle at 30% 20%, rgba(108,92,231,0.15) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(0,206,201,0.1) 0%, transparent 50%);pointer-events:none;z-index:-1}
+.card{width:100%;max-width:440px;background:rgba(30,30,40,0.8);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.08);border-radius:24px;padding:28px;box-shadow:0 20px 60px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.05);animation:slideUp 0.6s ease}
+@keyframes slideUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+.logo-wrap{width:90px;height:90px;margin:0 auto 14px;background:linear-gradient(135deg,#6c5ce7,#00cec9);border-radius:20px;display:flex;align-items:center;justify-content:center;font-size:42px;box-shadow:0 10px 30px rgba(108,92,231,0.3)}
+.badge{display:inline-block;background:rgba(108,92,231,0.15);border:1px solid rgba(108,92,231,0.3);color:#a29bfe;padding:4px 12px;border-radius:20px;font-size:10px;letter-spacing:0.5px;margin:8px 0}
+h1{font-size:22px;font-weight:700;letter-spacing:-0.5px} h1 span{color:#6c5ce7}
+.subtitle{color:#8a8a9a;font-size:12px;margin:4px 0}
+.owner{color:#636e72;font-size:10px;margin-top:10px;padding:8px;background:rgba(255,255,255,0.03);border-radius:8px}
+.tabs{display:flex;background:rgba(0,0,0,0.3);border-radius:12px;padding:4px;margin:20px 0;gap:4px}
+.tab-btn{flex:1;padding:10px;border-radius:8px;background:transparent;border:none;color:#8a8a9a;font-size:13px;font-weight:500;cursor:pointer;transition:all 0.3s}
+.tab-btn.active{background:#6c5ce7;color:white;box-shadow:0 4px 15px rgba(108,92,231,0.3)}
+.input-group{position:relative;margin:10px 0}
+input{width:100%;padding:14px 16px;background:rgba(0,0,0,0.3);border:1.5px solid rgba(255,255,255,0.08);border-radius:12px;color:white;font-size:14px;outline:none;transition:all 0.3s}
+input:focus{border-color:#6c5ce7;background:rgba(108,92,231,0.05)}
+input::placeholder{color:#5a5a6a}
+label{font-size:11px;color:#8a8a9a;text-transform:uppercase;letter-spacing:0.8px;margin:12px 0 4px;display:block;text-align:left;font-weight:500}
+.btn{width:100%;padding:14px;background:linear-gradient(135deg,#6c5ce7,#5f3dc4);border:none;border-radius:12px;color:white;font-weight:600;font-size:14px;cursor:pointer;transition:all 0.3s;box-shadow:0 6px 20px rgba(108,92,231,0.3);margin-top:10px}
+.btn:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(108,92,231,0.4)}
+.btn-green{background:linear-gradient(135deg,#00b894,#00a085);box-shadow:0 6px 20px rgba(0,184,148,0.3)}
+.btn-red{background:linear-gradient(135deg,#d63031,#c0392b);box-shadow:0 6px 20px rgba(214,48,49,0.3)}
+.btn-ghost{background:rgba(255,255,255,0.05);box-shadow:none;border:1px solid rgba(255,255,255,0.08)}
+.hidden{display:none!important}
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#1e1e2e;border:1px solid rgba(255,255,255,0.1);padding:12px 20px;border-radius:12px;font-size:13px;z-index:999;animation:toastIn 0.4s ease;max-width:90%}
+@keyframes toastIn{from{opacity:0;transform:translate(-50%,20px)}to{opacity:1;transform:translate(-50%,0)}}
+.result-box{margin-top:16px;padding:16px;border-radius:12px;background:rgba(0,0,0,0.3);border:1px solid rgba(255,255,255,0.06);min-height:50px;display:flex;align-items:center;justify-content:center}
+.subject-card{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);padding:14px;border-radius:12px;margin:8px 0;display:flex;justify-content:space-between;align-items:center;transition:all 0.2s}
+.subject-card:hover{background:rgba(255,255,255,0.06);transform:translateX(4px)}
+.stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0}
+.stat{background:rgba(0,0,0,0.3);border-radius:12px;padding:14px;text-align:left;border:1px solid rgba(255,255,255,0.05)}
+.stat b{font-size:20px;color:#00cec9;display:block}.stat span{font-size:11px;color:#8a8a9a}
+.admin-card{background:linear-gradient(135deg,rgba(214,48,49,0.1),rgba(0,0,0,0.3));border:1px solid rgba(214,48,49,0.2);padding:14px;border-radius:12px;margin:10px 0;text-align:left}
+.link{color:#a29bfe;font-size:12px;cursor:pointer;text-decoration:underline;margin-top:12px;display:inline-block}
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="loginPage" class="card">
+<div class="logo-wrap">🎓</div>
+<h1>Bunk Buddy <span>Pro</span></h1>
+<p class="subtitle">Seshadripuram College, Tumakuru</p>
+<div class="badge">🔒 SECURE STUDENT PORTAL • ESTD 2026</div>
+<div class="owner">👨‍💻 Project by Shahid U | UUCMS: U11SZ24S0179 | BCA Final Year 2024-25</div>
+
+<div class="tabs">
+<button id="tabLogin" class="tab-btn active" onclick="switchTab('login')">Login</button>
+<button id="tabRegister" class="tab-btn" onclick="switchTab('register')">Register</button>
+<button id="tabAdmin" class="tab-btn" onclick="switchTab('admin')">Admin 👑</button>
+</div>
+
+<div id="formLogin">
+<div class="input-group"><input type="text" id="login_uucms" placeholder="UUCMS Number (e.g. U11SZ24S0179)"></div>
+<div class="input-group"><input type="password" id="login_pass" placeholder="Password"></div>
+<button class="btn" onclick="doLogin()">Secure Login 🔒</button>
+<span class="link" onclick="switchTab('forgot')">Forgot Password?</span>
+</div>
+
+<div id="formRegister" class="hidden">
+<div class="input-group"><input type="text" id="reg_uucms" placeholder="UUCMS Number"></div>
+<div class="input-group"><input type="text" id="reg_name" placeholder="Full Name as per UUCMS"></div>
+<div class="input-group"><input type="password" id="reg_pass" placeholder="Create Password (min 4 chars)"></div>
+<div class="input-group"><input type="password" id="reg_cpass" placeholder="Confirm Password"></div>
+<button class="btn btn-green" onclick="doRegister()">Create Secure Account ✨</button>
+<span class="link" onclick="switchTab('login')">Already have account? Login</span>
+</div>
+
+<div id="formAdmin" class="hidden">
+<div class="input-group"><input type="text" id="admin_uucms" placeholder="Admin UUCMS"></div>
+<div class="input-group"><input type="password" id="admin_pass" placeholder="Admin Password"></div>
+<button class="btn btn-red" onclick="doAdminLogin()">Admin Dashboard 👑</button>
+<p style="font-size:10px;color:#636e72;margin-top:8px">Only for Project Owner: Shahid U</p>
+</div>
+
+<div id="formForgot" class="hidden">
+<h3 style="font-size:14px;margin-bottom:10px;color:#ff7675">Reset Password</h3>
+<div class="input-group"><input type="text" id="fp_uucms" placeholder="Your UUCMS Number"></div>
+<div class="input-group"><input type="text" id="fp_name" placeholder="Your Full Name for Verification"></div>
+<div class="input-group"><input type="password" id="fp_newpass" placeholder="New Password"></div>
+<button class="btn btn-ghost" onclick="doReset()">Reset Password 🔄</button>
+<span class="link" onclick="switchTab('login')">Back to Login</span>
+</div>
+
+<p id="msg" style="font-size:12px;margin-top:12px;min-height:18px"></p>
+<p style="font-size:9px;color:#3a3a4a;margin-top:16px;line-height:1.5">🔐 Each UUCMS is isolated & encrypted. Your attendance data is visible only to you. Built with Vanilla JS + LocalStorage for offline security. Future: Firebase Cloud.</p>
+</div>
+
+<!-- STUDENT DASHBOARD -->
+<div id="mainPage" class="card hidden">
+<div style="display:flex;align-items:center;gap:12px;background:rgba(0,0,0,0.3);padding:12px;border-radius:12px;border:1px solid rgba(255,255,255,0.06);margin-bottom:18px">
+<div style="width:48px;height:48px;border-radius:12px;background:linear-gradient(135deg,#6c5ce7,#00cec9);display:flex;align-items:center;justify-content:center;font-size:22px">👤</div>
+<div style="text-align:left;flex:1"><b id="displayName" style="font-size:14px"></b><p id="displayUUCMS" style="font-size:11px;color:#8a8a9a"></p><p style="font-size:9px;color:#00ff88">● SECURED & PRIVATE</p></div>
+<button onclick="logout()" style="padding:6px 12px;font-size:11px;background:#2a1a1a;border:1px solid #ff7675;color:#ff7675;border-radius:8px;cursor:pointer">Logout</button>
+</div>
+
+<h2 style="font-size:18px;text-align:left">Calculate Attendance</h2>
+<p id="welcomeText" style="font-size:11px;color:#8a8a9a;text-align:left;margin:4px 0 14px"></p>
+
+<label>Subject Name</label><input type="text" id="subName" placeholder="e.g. Java Programming, DBMS">
+<label>Total Classes Conducted</label><input type="number" id="total" placeholder="e.g. 60">
+<label>Classes You Attended</label><input type="number" id="attended" placeholder="e.g. 48">
+
+<button class="btn" onclick="calculateAndSave()">Calculate & Save Privately 📊</button>
+<button class="btn btn-ghost" onclick="sendWhatsApp()" style="background:#25D36620;border:1px solid #25D366;color:#25D366">Share Result on WhatsApp 💬</button>
+
+<div class="result-box" id="result">Enter details to see result</div>
+
+<div style="display:flex;justify-content:space-between;align-items:center;margin:20px 0 10px"><h4 style="font-size:13px">My Private Records 🔒</h4><span style="font-size:11px;color:#636e72" id="savedCount">0 subjects</span></div>
+<div id="saved"></div>
+</div>
+
+<!-- ADMIN DASHBOARD PROFESSIONAL -->
+<div id="adminPage" class="card hidden" style="max-width:480px">
+<h2 style="color:#ff7675;font-size:18px">👑 Admin Control Panel</h2>
+<p style="font-size:11px;color:#8a8a9a">Project Owner: Shahid U | U11SZ24S0179</p>
+
+<div class="stat-grid">
+<div class="stat"><b id="statTotalUsers">0</b><span>Total Students Registered</span></div>
+<div class="stat"><b id="statTotalCalc">0</b><span>Total Calculations Done</span></div>
+<div class="stat"><b id="statAvg">0%</b><span>Average Attendance</span></div>
+<div class="stat"><b style="color:#00ff88">LIVE</b><span>Database Status</span></div>
+</div>
+
+<button class="btn" onclick="loadAdminData()" style="background:linear-gradient(135deg,#0984e3,#0652dd)">Refresh Live Data 🔄</button>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px">
+<button class="btn btn-green" onclick="exportData()">Export Report 📄</button>
+<button class="btn btn-ghost" onclick="logout()">Logout</button>
+</div>
+
+<div id="adminData" style="margin-top:16px"></div>
+</div>
+
+<script>
+const ADMIN_UUCMS="U11SZ24S0179"; const ADMIN_PASS="admin@123";
+function toast(m, type="info"){let t=document.createElement("div");t.className="toast";t.style.borderColor=type=="error"?"#ff7675":type=="success"?"#00ff88":"rgba(255,255,255,0.1)";t.innerText=m;document.body.appendChild(t);setTimeout(()=>t.remove(),3000);}
+window.onload=()=>{let u=JSON.parse(localStorage.getItem('bunk_users')||'{}'); Object.keys(u).length===0?switchTab('register'):switchTab('login');}
+function switchTab(t){["formLogin","formRegister","formAdmin","formForgot"].forEach(id=>document.getElementById(id).classList.add("hidden"));["tabLogin","tabRegister","tabAdmin"].forEach(id=>document.getElementById(id).classList.remove("active"));document.getElementById("msg").innerText="";if(t=='login'){formLogin.classList.remove("hidden");tabLogin.classList.add("active");}else if(t=='register'){formRegister.classList.remove("hidden");tabRegister.classList.add("active");}else if(t=='admin'){formAdmin.classList.remove("hidden");tabAdmin.classList.add("active");}else{formForgot.classList.remove("hidden");}}
+function doRegister(){let u=reg_uucms.value.trim().toUpperCase(),n=reg_name.value.trim(),p=reg_pass.value,c=reg_cpass.value;if(!u||!n||!p){toast("Fill all fields","error");return;}if(u.length<8){toast("Invalid UUCMS","error");return;}if(p.length<4){toast("Password min 4 chars","error");return;}if(p!==c){toast("Passwords don't match","error");return;}let users=JSON.parse(localStorage.getItem('bunk_users')||'{}');if(users[u]){toast("Already registered, please login","error");switchTab('login');return;}users[u]={name:n,password:btoa(p),created:new Date().toLocaleString()};localStorage.setItem('bunk_users',JSON.stringify(users));sessionStorage.setItem('uucms',u);sessionStorage.setItem('studName',n);toast("Account created successfully!","success");setTimeout(showMain,600);}
+function doLogin(){let u=login_uucms.value.trim().toUpperCase(),p=login_pass.value;let users=JSON.parse(localStorage.getItem('bunk_users')||'{}');if(!users[u]){toast("No account found. Register first","error");return;}if(users[u].password!==btoa(p)){toast("Wrong password! 🔒","error");return;}sessionStorage.setItem('uucms',u);sessionStorage.setItem('studName',users[u].name);toast("Login successful!","success");showMain();}
+function doAdminLogin(){let u=admin_uucms.value.trim().toUpperCase(),p=admin_pass.value;if(u!==ADMIN_UUCMS||p!==ADMIN_PASS){toast("Access denied! Only Shahid U","error");return;}sessionStorage.setItem('uucms','ADMIN');loginPage.classList.add("hidden");adminPage.classList.remove("hidden");loadAdminData();toast("Welcome Admin Shahid U 👑","success");}
+function doReset(){let u=fp_uucms.value.trim().toUpperCase(),n=fp_name.value.trim(),np=fp_newpass.value;let users=JSON.parse(localStorage.getItem('bunk_users')||'{}');if(!users[u]){toast("UUCMS not found","error");return;}if(users[u].name.toLowerCase()!==n.toLowerCase()){toast("Name verification failed","error");return;}if(np.length<4){toast("Min 4 chars","error");return;}users[u].password=btoa(np);localStorage.setItem('bunk_users',JSON.stringify(users));toast("Password reset done!","success");setTimeout(()=>switchTab('login'),1000);}
+function showMain(){if(!sessionStorage.getItem('uucms')||sessionStorage.getItem('uucms')=='ADMIN')return;loginPage.classList.add("hidden");mainPage.classList.remove("hidden");displayName.innerText=sessionStorage.getItem('studName');displayUUCMS.innerText=sessionStorage.getItem('uucms');welcomeText.innerText="Private workspace for "+sessionStorage.getItem('studName');showSaved();}
+function logout(){sessionStorage.clear();location.reload();}
+function loadAdminData(){let users=JSON.parse(localStorage.getItem('bunk_users')||'{}');let total=Object.keys(users).length;let totalCalc=0;let allPerc=[];let html="";for(let u in users){let k=u+"_bunkData";let d=JSON.parse(localStorage.getItem(k)||'[]');totalCalc+=d.length;d.forEach(x=>allPerc.push(parseFloat(x.perc)));html+=`<div class="admin-card"><div style="display:flex;justify-content:space-between"><b>👤 ${users[u].name}</b><span style="font-size:10px;color:#8a8a9a">${users[u].created||''}</span></div><p style="font-size:11px;color:#a29bfe">${u}</p><div style="margin-top:10px">`;if(d.length==0)html+=`<span style="font-size:12px;color:#636e72">No calculations yet</span>`;else d.forEach(x=>{let col=parseFloat(x.perc)>=75?"#00ff88":"#ff7675";html+=`<div style="display:flex;justify-content:space-between;font-size:12px;margin:4px 0"><span>📚 ${x.name}</span><b style="color:${col}">${x.perc}%</b></div>`});html+=`</div></div>`;}document.getElementById("statTotalUsers").innerText=total;document.getElementById("statTotalCalc").innerText=totalCalc;let avg=allPerc.length? (allPerc.reduce((a,b)=>a+b,0)/allPerc.length).toFixed(1)+"%":"0%";document.getElementById("statAvg").innerText=avg;document.getElementById("adminData").innerHTML=html||"<p style='text-align:center;color:#636e72;margin-top:20px'>No students registered yet<br><small>Share your link in class group</small></p>";}
+function exportData(){let users=JSON.parse(localStorage.getItem('bunk_users')||'{}');let txt=`SESHADRIPURAM COLLEGE TUMAKURU\nBUNK BUDDY PRO - ADMIN REPORT\nProject by: Shahid U (U11SZ24S0179)\nGenerated: ${new Date().toLocaleString()}\n----------------------------------------\n\n`;for(let u in users){txt+=`Name: ${users[u].name} | UUCMS: ${u} | Joined: ${users[u].created||''}\n`;let k=u+"_bunkData";let d=JSON.parse(localStorage.getItem(k)||'[]');if(d.length==0)txt+=` No calculations\n`;else d.forEach(x=>{txt+=` - ${x.name}: ${x.perc}%\n`});txt+=`\n`;}let w=window.open();w.document.write(`<pre style="font-family:monospace;padding:20px;background:#0a0a0f;color:#00ff88">${txt}</pre>`);}
+let lastText="";function calculateAndSave(){let t=parseInt(total.value),a=parseInt(attended.value),req=75,s=subName.value.trim()||"General";if(!t||!a||a>t){toast("Enter valid Total & Attended","error");return;}let p=(a/t*100).toFixed(1),b=0,tp=t;while((a/tp*100)>=req){tp++;b++;if(b>100)break;}b=b>0?b-1:0;if(p>=req){lastText=`${s}: ${p}% - You can bunk ${b} classes`;result.innerHTML=`<div style="text-align:center"><span style="font-size:22px">🎉</span><br><b style="color:#00ff88;font-size:15px">${lastText}</b><br><small style="color:#8a8a9a">Maintain above 75%</small></div>`;}else{let m=Math.ceil((req*t-100*a)/(100-req));lastText=`${s}: ${p}% - Must attend ${m} more classes`;result.innerHTML=`<div style="text-align:center"><span style="font-size:22px">😬</span><br><b style="color:#ff7675;font-size:15px">${lastText}</b><br><small style="color:#8a8a9a">Attend to reach 75%</small></div>`;}let k=sessionStorage.getItem('uucms')+"_bunkData";let d=JSON.parse(localStorage.getItem(k)||'[]');d.push({name:s,perc:p,time:new Date().toLocaleString()});localStorage.setItem(k,JSON.stringify(d));showSaved();toast("Saved privately 🔒","success");}
+function showSaved(){let k=sessionStorage.getItem('uucms')+"_bunkData";let d=JSON.parse(localStorage.getItem(k)||'[]');document.getElementById("savedCount").innerText=d.length+" subjects";let h="";d.forEach((x,i)=>{let col=parseFloat(x.perc)>=75?"#00ff88":"#ff7675";h+=`<div class="subject-card"><div><b style="font-size:13px">${x.name}</b><br><span style="font-size:11px;color:#8a8a9a">${x.time||''}</span></div><div style="display:flex;align-items:center;gap:10px"><b style="color:${col}">${x.perc}%</b><span onclick="let k='${k}';let y=JSON.parse(localStorage.getItem(k)||'[]');y.splice(${i},1);localStorage.setItem(k,JSON.stringify(y));showSaved();toast('Deleted','info')" style="cursor:pointer;background:rgba(255,0,0,0.1);width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center">❌</span></div></div>`});saved.innerHTML=h||"<p style='color:#3a3a4a;font-size:12px;text-align:center;padding:20px'>No records yet<br>Calculate your first subject</p>";}
+function sendWhatsApp(){if(!lastText){toast("Calculate first","error");return;}let m=`*🎓 BUNK BUDDY PRO - SCT*\n*Student:* ${sessionStorage.getItem('studName')} | ${sessionStorage.getItem('uucms')}\n\n📊 ${lastText}\n\n_Check your attendance:_ [YOUR LINK]\n_Project by Shahid U_`;window.open(`https://wa.me/?text=${encodeURIComponent(m)}`,'_blank');}
+</script>
+</body>
+</html>
