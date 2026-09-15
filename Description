@@ -1,0 +1,43 @@
+# 📚 BUNK BUDDY PRO
+### Smart Attendance Management Solution for SCT
+
+> **Live Demo:** https://bunk-buddy-pro.netlify.app
+> **Built by:** Shahid U (U11SZ24S0179) - BCA Final Year 2024-25
+> **College:** Seshadripuram College, Tumakuru
+
+---
+
+### 🔥 What is Bunk Buddy Pro?
+
+Bunk Buddy Pro answers every student's question: **"Kitna bunk kar sakte hai?"**
+
+A private, fast, mobile-friendly web app that calculates your attendance percentage instantly and tells you how many classes you can safely bunk OR must attend to maintain 75%.
+
+### 🎯 Problem Statement
+
+- Students don't know exact % till exam time
+- Manual calculation = errors & anxiety
+- No private tool for SCT students
+- 75% criteria confusion = risk of year loss
+
+### ✨ Features
+
+- 🔐 **Secure Auth:** UUCMS ID based registration & login
+- 🧮 **Instant Calc:** P = (Attended/Total)*100
+- 🔮 **Smart Prediction:** Safe bunks & required classes
+- 🔒 **100% Private:** Your data = only visible to you (UUCMS_bunkData key)
+- 👨‍🏫 **Admin Panel:** Overall stats for faculty
+- 📱 **Responsive:** Works like an app on mobile
+
+### 🧠 Key Formulas
+
+```javascript
+percentage = (attended / total) * 100
+
+if (percentage >= 75) {
+  canBunk = Math.floor((attended - 0.75 * total) / 0.75)
+  // "You can bunk 2 more classes safely!"
+} else {
+  mustAttend = Math.ceil((0.75 * total - attended) / 0.25)
+  // "You must attend next 5 classes!"
+}
